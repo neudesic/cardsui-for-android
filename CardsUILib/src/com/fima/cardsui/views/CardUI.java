@@ -1,12 +1,8 @@
 package com.fima.cardsui.views;
 
-import java.util.ArrayList;
-
 import android.annotation.SuppressLint;
 import android.content.Context;
-import android.os.Build;
 import android.util.AttributeSet;
-import android.util.Log;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -15,15 +11,15 @@ import android.view.animation.TranslateAnimation;
 import android.widget.AbsListView;
 import android.widget.AbsListView.OnScrollListener;
 import android.widget.FrameLayout;
-import android.widget.Space;
 import android.widget.TableLayout;
 import android.widget.TableRow;
-
 import com.fima.cardsui.R;
 import com.fima.cardsui.StackAdapter;
 import com.fima.cardsui.objects.AbstractCard;
 import com.fima.cardsui.objects.Card;
 import com.fima.cardsui.objects.CardStack;
+
+import java.util.ArrayList;
 
 public class CardUI extends FrameLayout {
 
@@ -194,16 +190,11 @@ public class CardUI extends FrameLayout {
 					break;
 				}
 
-				/** this can be used if the build is below honeycomb **/
-				if (Build.VERSION.SDK_INT <= Build.VERSION_CODES.HONEYCOMB) {
 					TranslateAnimation anim = new TranslateAnimation(0, 0,
 							translationY, translationY);
 					anim.setFillAfter(true);
 					anim.setDuration(0);
 					mQuickReturnView.startAnimation(anim);
-				} else {
-					mQuickReturnView.setTranslationY(translationY);
-				}
 
 			}
 
@@ -333,11 +324,8 @@ public class CardUI extends FrameLayout {
 					//fill the empty space with spacers
 					for (int j = mAdapter.getCount() % mColumnNumber; j > 0; j--) {
 						View space = null;
-						if(Build.VERSION.SDK_INT >= Build.VERSION_CODES.ICE_CREAM_SANDWICH) {
-							space = new Space(tr.getContext()) ;
-						} else {
+
 							space = new View(tr.getContext()) ;
-						}
 						space.setLayoutParams(new TableRow.LayoutParams(TableRow.LayoutParams.MATCH_PARENT, TableRow.LayoutParams.WRAP_CONTENT, 1f));
 						tr.addView(space);
 					}
